@@ -27,7 +27,6 @@
 */
 
 #include "VIOHistograms.h"
-#include "GUtilityFuncts.h" //NK
 #include <vector> //NK
 #include <utility> //NK
 
@@ -80,6 +79,7 @@ void VIOHistograms::init( string i_outfile, bool iShort )
     if( !bShort )
     {
     
+        /*
         sprintf( hname, "hGLambda" );
         sprintf( htitle, "Cherenkov photon wavelength (no absorption/efficencies applied)" );
         hGLambda = new TH1D( hname, htitle, 400, 0., 800. );
@@ -105,14 +105,16 @@ void VIOHistograms::init( string i_outfile, bool iShort )
         hGXY->SetXTitle( "x [m] (north)" );
         hGXY->SetYTitle( "y [m] (west)" );
         hisList->Add( hGXY );
-        
+        */
         //NK
+        /*
         sprintf( hname, "hGCXCY" );
         sprintf( htitle, "Cherenkov photon direction cosines (no absorption/efficencies applied)" );
         hGCXCY = new TH2D( hname, htitle, 32, -0.026667, 0.026667, 32, -0.026667, 0.026667 );
         hGCXCY->SetXTitle( "direction cosine, x" );
         hGCXCY->SetYTitle( "direction cosine, y" );
         hisList->Add( hGCXCY );
+        */
 
         // NK
         /*
@@ -142,6 +144,7 @@ void VIOHistograms::init( string i_outfile, bool iShort )
         hisList->Add( hSXY );
         
         //NK
+        /*
         sprintf( hname, "hSCXCY" );
         sprintf( htitle, "Cherenkov photons, focal plane (absorption/efficencies applied)" );
         //hSCXCY = new TH2D( hname, htitle, 32, -0.2, 0.2, 32, -0.2, 0.2 );
@@ -152,6 +155,7 @@ void VIOHistograms::init( string i_outfile, bool iShort )
         hSCXCY->SetXTitle( "x" );
         hSCXCY->SetYTitle( "y" );
         hisList->Add( hSCXCY );
+        */
 
         //NK
         /*
@@ -182,17 +186,17 @@ void VIOHistograms::init( string i_outfile, bool iShort )
     }
     else
     {
-        hBunch = 0;
+        //hBunch = 0;
         hT0 = 0;
         hZem = 0;
-        hGXY = 0;
-        hGCXCY = 0; //NK
+        //hGXY = 0;
+        //hGCXCY = 0; //NK
         //hGZeAz = 0; NK
-        hGLambda = 0;
+        //hGLambda = 0;
         hGProb = 0;
         hGZem = 0;
         hSXY = 0;
-        hSCXCY = 0; //NK
+        //hSCXCY = 0; //NK
         //hSZeAz = 0; NK
         hSLambda = 0;
         hSProb = 0;
@@ -245,20 +249,25 @@ void VIOHistograms::init( string i_outfile, bool iShort )
     fTree->Branch( "CX", &CX); //NK
     fTree->Branch( "CY", &CY); //NK
     fTree->Branch( "telID", &telID); //NK
+    //fTree->Branch( "CTime", &CTime); //NK
     //fTree->Branch("CXCY", CXCY, "CXCY", &CXCY );
 
     if( !bShort )
     {
+        /*
         if( !bSmallFile )
         {
             fTree->Branch( "hGLambda", "TH1D", &hGLambda, 32000, 0 );
         }
+        */
         fTree->Branch( "hSLambda", "TH1D", &hSLambda, 32000, 0 );
         //NK
+        /*
         if( !bSmallFile )
         {
             fTree->Branch( "hSCXCY", "TH2D", &hSCXCY, 32000, 0 );
         }
+        */
         //NK
         /*
         if( !bSmallFile )
@@ -266,19 +275,23 @@ void VIOHistograms::init( string i_outfile, bool iShort )
             fTree->Branch( "hSZeAz", "TH2D", &hSZeAz, 32000, 0 );
         }
         */
-        fTree->Branch( "hBunch", "TH1D", &hBunch, 32000, 0 );
+        //fTree->Branch( "hBunch", "TH1D", &hBunch, 32000, 0 );
         fTree->Branch( "hZem", "TH1D", &hZem, 32000, 0 );
         fTree->Branch( "hT0", "TH1D", &hT0, 32000, 0 );
         
+        /*
         if( !bSmallFile )
         {
             fTree->Branch( "hGXY", "TH2D", &hGXY, 32000, 0 );
         }
+        */
         //NK
+        /*
         if( !bSmallFile )
         {
             fTree->Branch( "hGCXCY", "TH2D", &hGCXCY, 32000, 0 );
         }
+        */
         //NK
         /*
         if( !bSmallFile )
@@ -314,22 +327,22 @@ void VIOHistograms::newEvent( float* evth, telescope_array array, int i_array )
     
     if( !bShort )
     {
-        hBunch->Reset();
+        //hBunch->Reset();
         hZem->Reset();
         hT0->Reset();
         
         hSXY->Reset();
-        hSCXCY->Reset(); //NK
+        //hSCXCY->Reset(); //NK
         //hSZeAz->Reset(); NK
         hSProb->Reset();
         hSLambda->Reset();
         hSZem->Reset();
         
-        hGXY->Reset();
-        hGCXCY->Reset(); //NK
+        //hGXY->Reset();
+        //hGCXCY->Reset(); //NK
         //hGZeAz->Reset(); NK
         hGProb->Reset();
-        hGLambda->Reset();
+        //hGLambda->Reset();
         hGZem->Reset();
         
         if( hCXYZ )
@@ -389,6 +402,7 @@ void VIOHistograms::newEvent( float* evth, telescope_array array, int i_array )
     }
     CX.clear();//NK
     CY.clear();//NK
+    //CTime.clear();//NK
     telID.clear();//NK
     xCore = array.shower_sim.xcore;
     yCore = array.shower_sim.ycore;
@@ -405,7 +419,7 @@ void VIOHistograms::fillBunch( bunch i_bunch, double itime )
 {
     if( !bShort )
     {
-        hBunch->Fill( i_bunch.photons );
+        //hBunch->Fill( i_bunch.photons );
         hT0->Fill( itime );
         hZem->Fill( i_bunch.zem * 0.01 );
     }
@@ -437,7 +451,7 @@ void VIOHistograms::fillGenerated( bunch ph, double prob )
         {
             az = 360. - az;
         }
-        
+        /*
         if( !bCORSIKA_coordinates )
         {
             hGXY->Fill( ph.x, ph.y );
@@ -446,10 +460,11 @@ void VIOHistograms::fillGenerated( bunch ph, double prob )
         {
             hGXY->Fill( ph.y, -ph.x );
         }
-        hGCXCY->Fill( ph.cx*degrad, ph.cy*degrad); //NK
+        */
+        //hGCXCY->Fill( ph.cx*degrad, ph.cy*degrad); //NK
         //hGZeAz->Fill( ze, az ); NK
         hGProb->Fill( prob );
-        hGLambda->Fill( ph.lambda );
+        //hGLambda->Fill( ph.lambda );
         hGZem->Fill( ph.zem );
     }
 }
@@ -528,14 +543,17 @@ void VIOHistograms::fillSurvived( bunch ph, double prob, float* evth, int iTel )
         */ 
 
         //negative because want direction relative to telescope
-        double cameraX = -ph.cx; 
-        double cameraY = -ph.cy;    
+        //double cameraX = -ph.cx; 
+        //double cameraY = -ph.cy;    
 
-        CX.push_back({cameraX*degrad});
-        CY.push_back({cameraY*degrad});
+        //CX.push_back({cameraX*degrad});
+        //CY.push_back({cameraY*degrad});
+        CX.push_back({ph.cx});
+        CY.push_back({ph.cy});
+        //CTime.push_back({ph.ctime});
         telID.push_back({iTel+1});
 
-        hSCXCY->Fill(cameraX*degrad,cameraY*degrad); 
+        //hSCXCY->Fill(cameraX*degrad,cameraY*degrad); 
         //hSCXCY->Fill(ph.cx*degrad,ph.cy*degrad); //NK
         //hSZeAz->Fill( ze, az ); NK
         hSProb->Fill( prob );

@@ -46,18 +46,18 @@ class VIOHistograms
     private:
         TList* hisList;
         
-        TH1D* hBunch;
+        //TH1D* hBunch;
         TH1D* hT0;
         TH1D* hZem;
         
-        TH2D* hGXY;
-        TH2D* hGCXCY; //NK
+        //TH2D* hGXY;
+        //TH2D* hGCXCY; //NK
         //TH2D* hGZeAz; NK
-        TH1D* hGLambda;
+        //TH1D* hGLambda;
         TH1D* hGProb;
         TH1D* hGZem;
         TH2D* hSXY;
-        TH2D* hSCXCY; //NK
+        //TH2D* hSCXCY; //NK
         //TH2D* hSZeAz; NK
         TH1D* hSLambda;
         TH1D* hSProb;
@@ -119,6 +119,7 @@ class VIOHistograms
         
         std::vector <double > CX;  //NK
         std::vector <double > CY;  //NK
+        //std::vector <double > CTime; //NK
         std::vector <int > telID; //NK
         //TH2D* CXCY[MAX_TEL];
 

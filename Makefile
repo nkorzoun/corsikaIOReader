@@ -51,11 +51,9 @@ ROOTGLIBS    := $(shell root-config --glibs)
 CXXFLAGS     += $(ROOTCFLAGS)
 LIBS          = $(ROOTLIBS)
 LIBS         += -lMinuit
-LIBS 		 += -lTreePlayer -lGenVector -lGeomBuilder -lGeomPainter -lGeom -lGed  #NK
 
 GLIBS         = $(ROOTGLIBS)
 GLIBS        += -lMinuit
-GLIBS 		 += -lTreePlayer -lGenVector -lGeomBuilder -lGeomPainter -lGeom -lGed  #NK
 
 INCLUDEFLAGS  = -I. -I./inc/
 CXXFLAGS     += $(INCLUDEFLAGS)
@@ -70,7 +68,7 @@ vpath %.c ./src/
 all:	corsikaIOreader
 
 
-corsikaIOreader:	GUtilityFuncts.o GDefinition.o straux.o eventio.o warning.o io_simtel.o VIOHistograms.o atmo.o fileopen.o sim_cors.o corsikaIOreader.o VAtmosAbsorption.o VGrisu.o VCORSIKARunheader.o VCORSIKARunheader_Dict.o
+corsikaIOreader:	straux.o eventio.o warning.o io_simtel.o VIOHistograms.o atmo.o fileopen.o sim_cors.o corsikaIOreader.o VAtmosAbsorption.o VGrisu.o VCORSIKARunheader.o VCORSIKARunheader_Dict.o
 		$(LD) $(LDFLAGS) $^ $(LIBS) $(OutPutOpt) $@
 		@echo "$@ done"
 
@@ -92,8 +90,6 @@ VAtmosAbsorption.o:	VAtmosAbsorption.h
 VCORSIKARunheader.o:	VCORSIKARunheader.h
 VGrisu.o:	mc_tel.h sim_cors.h VCORSIKARunheader.h
 sim_cors.o:	sim_cors.h
-GUtilityFuncts.o: GUtilityFuncts.h #NK
-GDefinition.o: GDefinition.h #NK
 
 VCORSIKARunheader_Dict.cpp:	VCORSIKARunheader.h VCORSIKARunheaderLinkDef.h
 	@echo "Generating dictionary $@..."
