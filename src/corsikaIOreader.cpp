@@ -1057,15 +1057,15 @@ int main( int argc, char** argv )
                                     continue;
                                 }
                                 /* NK
-                                * panOSETI quantum efficiency
+                                * PANOSETI quantum efficiency
                                 */
-                                // apply panOSETI quantum efficiency
+                                // apply PANOSETI quantum efficiency
                                 prob *= 0.9189 / (1. + ( exp(-0.2046*(lambda-384.2)) ) );
                                 if( iRand > prob )
                                 {
                                     continue;
                                 }
-                                // apply panOSETI lens transmission
+                                // apply PANOSETI lens transmission
                                 prob *= ( (-3.244e-11 * pow(lambda,4) ) + (9.376e-8 * pow(lambda,3) ) + (-9.880e-5 * pow(lambda,2) ) + (4.402e-2 * lambda) - 6.623 );
                                 if( iRand > prob )
                                 {

@@ -502,60 +502,12 @@ void VIOHistograms::fillSurvived( bunch ph, double prob, float* evth, int iTel )
         {
             hSXY->Fill( ph.y, -ph.x);
         }
-        
-        // repurporsed from GrOptics:
-        /*
-        double x = 0;
-        double y = 0;
-        double az_s = az;
-        double zn_s = ze;
-        // telescope pointing? assume straight up?
-        double az_t = 0;
-        double zn_t = 0; //NK
-
-        GUtilityFuncts::sourceOnTelescopePlane(az_s, zn_s, az_t, zn_t, &x, &y); //NK
-        */
-    
-        //https://astronomy.stackexchange.com/a/43482
-        //telescope pointing
-        /*
-        double c_dec = TMath::Pi()/2 - evth[10]; //assuming no wobble
-        double c_ra = evth[11]; //assuming no wobble
-        //photon directions
-        double s_dec = TMath::Pi()/2 - ze;
-        double s_ra = az;
-        //transform
-        double stdX = cos(s_dec) * sin(s_ra - c_ra) / (cos(c_dec) * cos(s_dec) * cos(s_ra - c_ra) + sin(c_dec) * sin(s_dec));
-        double stdY = (sin(c_dec) * cos(s_dec) * cos(s_ra - c_ra) - cos(c_dec) * sin(s_dec)) / (cos(c_dec) * cos(s_dec) * cos(s_ra - c_ra) + sin(c_dec) * sin(s_dec));
-        hSCXCY->Fill( stdY*degrad,-stdX*degrad); //NK
-        */
-    
-        // NK - assumes no wobble
-        // start with 0 degree zenith angle
-        /*
-        double pointingZe = evth[10];
-        double pointingAz = evth[11];
-        double pointingX = sin(pointingZe)*cos(pointingAz);
-        double pointingY = sin(pointingZe)*sin(pointingAz);
-
-        double cameraX = ph.cx-pointingX;
-        double cameraY = ph.cy-pointingY;
-        */ 
-
-        //negative because want direction relative to telescope
-        //double cameraX = -ph.cx; 
-        //double cameraY = -ph.cy;    
-
-        //CX.push_back({cameraX*degrad});
-        //CY.push_back({cameraY*degrad});
-        CX.push_back({ph.cx});
-        CY.push_back({ph.cy});
-        //CTime.push_back({ph.ctime});
+  
+        CX.push_back({ph.cx}); // NK
+        CY.push_back({ph.cy}); // NK
+        //CTime.push_back({ph.ctime}); // NK
         telID.push_back({iTel+1});
 
-        //hSCXCY->Fill(cameraX*degrad,cameraY*degrad); 
-        //hSCXCY->Fill(ph.cx*degrad,ph.cy*degrad); //NK
-        //hSZeAz->Fill( ze, az ); NK
         hSProb->Fill( prob );
         hSLambda->Fill( ph.lambda );
         hSZem->Fill( ph.zem );
